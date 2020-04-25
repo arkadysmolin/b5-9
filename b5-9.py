@@ -45,11 +45,11 @@ class Timer:
 		return self.function(*args, **kwargs)
 
 @Timer
-def z():
-	for j in range(10000000):
+def z(x):
+	for j in range(x):
 		pass
 
-z()
+z(10000000)
 
 
 
