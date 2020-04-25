@@ -29,11 +29,11 @@ print(s())
 
 class Timer:
 	def __init__(self, num_runs):
-		self.num_runs=num_runs
-		self.mode="constructor" # В режиме конструктора берём аргумент num_runs
+		self.mode="constructor"
+		self.num_runs=num_runs # В режиме конструктора берём аргумент num_runs
 
 	def __call__(self, *args):
-		if self.mode=="num_runs_read": # если сейчас режим конструктора
+		if self.mode=="constructor": # если сейчас режим конструктора
 			self.function=args[0] # в аргументе будет лежать функция
 			self.mode="decor" # для следующего запуска будем работать как декоратор
 			return self # возвращаем функции декоратора
