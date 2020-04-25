@@ -28,23 +28,28 @@ print(s())
 
 
 class Timer:
-	def __init__(self, function):
-		self.num_runs=10
-		self.function=function
+	def __init__(self, num_runs):
+		self.num_runs=num_runs
+		self.mode="num_runs_read" # для первого прогона берём аргумент num_runs
 
-	def __call__(self, *args, **kwargs):
+	def __call__(self, *args):
+		if self.mode=="num_runs_read":
+			self.function=args[0] # при втором прогоне в аргументе будет лежать функция
+			self.mode="decor" # во втором прогоне работаем как декоратор
+			return self
+
 		av_time_sum=0
 		for _ in range(self.num_runs):
 			t_begin = time.time()
-			self.function(*args, **kwargs)
+			self.function(args[0])
 			t_end = time.time()
 			func_time = t_end-t_begin
 			av_time_sum += func_time
 		av_time = av_time_sum / self.num_runs
 		print ("Декоратор как класс - время {} сек на {} прогонов".format(av_time,self.num_runs))
-		return self.function(*args, **kwargs)
+		return self.function(*args)
 
-@Timer
+@Timer(10)
 def z(x):
 	for j in range(x):
 		pass
