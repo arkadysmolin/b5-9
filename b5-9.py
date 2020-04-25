@@ -68,12 +68,12 @@ class Timer_with:
 		return self
 
 	def __call__(self, function, *args):
-		self.function = function
+		self.function = function # забираем функцию
 
 		av_time_sum=0
 		for _ in range(self.num_runs):
 			t_begin = time.time()
-			self.function(args[0])
+			self.function(args[0]) # выполняем функцию с соответствующем аргументом
 			t_end = time.time()
 			func_time = t_end-t_begin
 			av_time_sum += func_time
@@ -86,7 +86,6 @@ class Timer_with:
 
 
 def dad(ggg):
-	s=0
 	for j in range(ggg):
 		pass
 	
@@ -95,8 +94,8 @@ def dad(ggg):
 repeat=10
 ggg=10000000
 
-with Timer_with(repeat) as tw:
-	asd=tw(dad,ggg)
+with Timer_with(repeat) as tw: # передаем количество повторений
+	asd=tw(dad,ggg) # передаем функцию и аргумент
 
 
 
