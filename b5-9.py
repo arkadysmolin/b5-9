@@ -60,9 +60,43 @@ z(10000000)
 
 
 
+class Timer_with:
+	def __init__(self, num_runs):
+		self.num_runs=num_runs
+
+	def __enter__(self):
+		return self
+
+	def __call__(self, function, *args):
+		self.function = function
+
+		av_time_sum=0
+		for _ in range(self.num_runs):
+			t_begin = time.time()
+			self.function(args[0])
+			t_end = time.time()
+			func_time = t_end-t_begin
+			av_time_sum += func_time
+		av_time = av_time_sum / self.num_runs
+		print ("Декоратор как контекстный менеджер - время {} сек на {} прогонов".format(av_time,self.num_runs))
+		
+
+	def __exit__(self, exc_type, exc_val, exc_tb):
+		return self
 
 
+def dad(ggg):
+	s=0
+	for j in range(ggg):
+		pass
+	
 
+
+repeat=10
+ggg=10000000
+
+with Timer_with(repeat) as tw:
+	asd=tw(dad,ggg)
 
 
 
@@ -95,8 +129,6 @@ z(10000000)
 # 	print(asd)
 
 # print (asd())
-
-
 
 
 
