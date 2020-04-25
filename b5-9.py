@@ -47,7 +47,7 @@ class Timer:
 			av_time_sum += func_time
 		av_time = av_time_sum / self.num_runs
 		print ("Декоратор как класс - время {} сек на {} прогонов".format(av_time,self.num_runs))
-		return self.function(*args)
+		return self
 
 @Timer(10)
 def z(x):
